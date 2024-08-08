@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
+import { Card } from 'antd';
 import { useGetHousesQuery } from '@/Features/api/gotApi';
 
 const Home = () => {
@@ -14,26 +15,35 @@ const Home = () => {
   if (error) return <p>An error occurred</p>;
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Game of Thrones Houses</h1>
-      <input
-        type="text"
-        placeholder="Search for a house..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="p-2 border rounded mb-4"
-      />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredHouses?.map((house: any) => (
-          <div key={house.url} className="p-4 border rounded shadow">
-            <h2 className="text-xl font-semibold">{house.name}</h2>
-            <p><strong>Region:</strong> {house.region}</p>
-            <p><strong>Coat of Arms:</strong> {house.coatOfArms}</p>
-            <Link href={`/houses/${house.url.split('/').pop()}`} legacyBehavior>
-              <a className="text-blue-500">View Details</a>
-            </Link>
-          </div>
-        ))}
+    <div className="min-h-screen bg-gray-200 flex flex-col items-center">
+      <div className="container mx-auto p-6 ">
+        <h1 className="text-3xl font-bold mb-6 text-center">Game of Thrones Houses</h1>
+        <input
+          type="text"
+          placeholder="Search for a house..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="p-3 border border-gray-300 text-black rounded mb-6 w-full"
+        />
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredHouses?.map((house: any) => (
+            <Card
+              key={house.url}
+              title={house.name}
+              bordered={false}
+              className="w-full"
+              extra={
+                <Link href={`/houses/${house.url.split('/').pop()}`} legacyBehavior>
+                  <a className="text-blue-500 hover:text-blue-700 transition">View Details</a>
+                </Link>
+              }
+            >
+              <p><strong>Region:</strong> {house.region}</p>
+              <p><strong>Coat of Arms:</strong> {house.coatOfArms}</p>
+            </Card>
+          ))}
+        </div>
       </div>
     </div>
   );

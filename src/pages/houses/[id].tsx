@@ -1,6 +1,6 @@
 import { useGetHouseDetailsQuery } from '@/Features/api/gotApi';
 import { useRouter } from 'next/router';
-
+import { Card } from "antd";
 
 const HouseDetails = () => {
   const router = useRouter();
@@ -11,15 +11,26 @@ const HouseDetails = () => {
   if (error) return <p>An error occurred</p>;
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">{house.name}</h1>
-      <p><strong>Region:</strong> {house.region}</p>
-      <p><strong>Coat of Arms:</strong> {house.coatOfArms}</p>
-      <p><strong>Current Lord:</strong> {house.currentLord}</p>
-      <p><strong>Overlord:</strong> {house.overlord}</p>
-      <p><strong>Founded:</strong> {house.founded}</p>
+    <div className="min-h-screen bg-gray-100 flex justify-center items-center">
+      <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg">
+        <Card
+          title={house.name}
+          bordered={false}
+          className="w-full"
+          style={{ maxWidth: 600 }}
+        >
+          <div className="text-lg">
+            <p><strong>Region:</strong> {house.region}</p>
+            <p><strong>Coat of Arms:</strong> {house.coatOfArms}</p>
+            <p><strong>Current Lord:</strong> {house.currentLord}</p>
+            <p><strong>Overlord:</strong> {house.overlord}</p>
+            <p><strong>Founded:</strong> {house.founded}</p>
+          </div>
+        </Card>
+      </div>
     </div>
   );
 };
 
 export default HouseDetails;
+
