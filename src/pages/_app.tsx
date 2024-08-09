@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { store } from '@/store'
 import MyFooter from "@/components/footer";
 import Header from "@/components/header";
+import Blog from "@/components/shared/BlogContent";
 export default function App({ Component, pageProps }: AppProps) {
 
   return (
